@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -120,6 +120,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "pharmacy-help-front"
+    }
+  },
+  "defaultProject": "pharmacy-help-front",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
