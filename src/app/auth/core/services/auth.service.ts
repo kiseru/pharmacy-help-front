@@ -30,6 +30,6 @@ export class AuthService {
     const options = new HttpHeaders({
       Authorization: `Token ${this.cookieService.get('auth_token')}`
     });
-    return this.http.get<User>('users/', { headers: options });
+    return this.http.get<User>('users/me/', { headers: options });
   }
 }
