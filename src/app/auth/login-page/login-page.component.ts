@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from '@app/core/services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { switchMap } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { State } from '@app/store/state';
+import { login } from '@app/store/auth/auth.actions';
+import { selectAuthCurrentUser } from '@app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +16,8 @@ export class LoginPageComponent implements OnInit {
   form: FormGroup;
 
   constructor(private authService: AuthService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private store: Store<State>) {
   }
 
   ngOnInit() {
@@ -22,12 +26,11 @@ export class LoginPageComponent implements OnInit {
       password: ['']
     });
 
-    this.authService.user
-      .pipe(switchMap())
-      .subscribe(user => console.log(user));
+    this.store.pipe(select(selectAuthCurrentUser))
+      .subscribe(console.log);
   }
 
   submit(): void {
-    this.authService.login(this.form.value);
+    this.store.dispatch(login({ loginForm: this.form.value }));
   }
 }

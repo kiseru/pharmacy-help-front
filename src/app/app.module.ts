@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiHostInterceptorService } from './core/http-interceptors/api-host-interceptor.service';
+import { StoreModule } from '@app/store/store.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ApiHostInterceptorService } from './core/http-interceptors/api-host-int
     AppRoutingModule,
     AuthModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiHostInterceptorService, multi: true }
